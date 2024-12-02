@@ -8,6 +8,23 @@ body {
     text-align: left;
 }
 
+#map {
+    position: absolute;  /* Ensures the map is positioned relative to the viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;        /* Full width of the viewport */
+    height: 100vh;       /* Full height of the viewport */
+    z-index: -1;         /* Sends the map behind other elements */
+}
+
+.overlay-content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
 .container {
     margin-left: auto;
     margin-right: auto;
