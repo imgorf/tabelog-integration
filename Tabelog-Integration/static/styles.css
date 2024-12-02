@@ -34,13 +34,17 @@ body {
     width: 90%;
 }
 
-.header {
-    background-color: #477bff;
-    color: #fff;
-    margin-bottom: 2rem;
-    padding: 2rem 1rem;
+.translucent-box {
+    width: 300px;
+    height: 100px;
+    background-color: rgba(134, 194, 255, 0.3);  /* 30% opaque blue background */
+    color: black;  /* Solid flask (opaque) text color */
     text-align: center;
-}
+    line-height: 100px;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    border: 2px none #0080ff;  /* Optional: add border to define the box */
+  }
 
 .section {
     padding-bottom: 1rem;
