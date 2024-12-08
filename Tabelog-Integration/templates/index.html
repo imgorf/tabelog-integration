@@ -4,52 +4,21 @@
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link href="/static/styles.css" rel="stylesheet">
-        <title>Birthdays</title>
+        <title>Tabelog Tracker</title>
     </head>
     <body>
         <div class="header">
-            <h1>Birthdays</h1>
+            <h1>Tabelog Tracker</h1>
         </div>
         <div class="container">
             <div class="section">
 
-                <h2>Add a Birthday</h2>
+                <h2>Add a Location</h2>
                 <form method="post">
-                    <input type="text" id="name" name="name" placeholder="NAME">
-                    <input type="number" id="month" name="month" placeholder="MONTH" min="1" max="12" style="width: 50px;">
-                    <input type="number" id="day" name="day" placeholder="DAY" min="1" max="31" style="width: 50px;">
+                    <input type="text" id="name" name="name" placeholder="LINK">
                     <input type="submit" value="SUBMIT" style="background-color: cyan; color: white; padding: 5px; border: none; border-radius: 5px;">
                 </form>
             </div>
-
-            <div class="section">
-
-                <h2>All Birthdays</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Birthday</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in rows %}
-                        <tr>
-                            <td>{{ row.name }}</td>
-                            <td>{{ row.month}}</td>
-                            <td>{{ row.day }}</td>
-                            <td>
-                                <form action="/remove" method="post">
-                                    <input type="hidden" name="id" value="{{ row.id }}">
-                                    <button type="submit">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
     <div>
         <p>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.745042883789!2d103.76036590917778!3d1.3290055986528024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da11a69aa0ac43%3A0xca88158b0ea52b74!2sClementi%20Camp!5e0!3m2!1sen!2ssg!4v1732959510205!5m2!1sen!2ssg" 
