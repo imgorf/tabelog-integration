@@ -37,6 +37,15 @@ body {
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
 
+#map {
+    position: absolute;  /* Ensures the map is positioned relative to the viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;        /* Full width of the viewport */
+    height: 100vh;       /* Full height of the viewport */
+    z-index: -1;         /* Sends the map behind other elements */
+}
+
 h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 48px;
