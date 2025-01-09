@@ -1,14 +1,23 @@
 from sqlite3 import connect, Cursor
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask_session import Session
+from bs4 import BeautifulSoup
+import requests
 
 # Configure application
 app = Flask(__name__)
+
+
+#Configuring session type to auto logout everytime the site is closed
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Initialize SQL DB
-con = connect("birthdays.db", check_same_thread=False)
+con = connect("tabelog.db", check_same_thread=False)
 cur = con.cursor()
 
 @app.after_request
@@ -24,22 +33,29 @@ def after_request(response):
 def index():
     if request.method == "POST":
 
-        name = request.form['name']
-        month = int(request.form['month'])
-        day = int(request.form['day'])
-        print(f"name: {name}, month: {month}, day: {day}")
-        print((name, month, day))
-        cur.execute("INSERT INTO birthdays (name, month, day) VALUES (:name, :month, :day)", name=name, month=month, day=day)
-        return redirect("/")
+        #extract url
+        url = request.form.get('url')
+            
+        #check if url was provided
+        if url:
+            #check if submitted url was valid
+            response = requests.get(url)
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.content, 'html.parser')
+
+                #scrape website for name and address of restaurant
+                name = soup.find('h2', class_='display-name').find('span').get_text(strip=True)
+                address = soup.find('p', class_='rstinfo-table__address').get_text(strip=True)
+                print((name, address))
 
     else:
 
-        rows = cur.execute("SELECT * FROM birthdays")
+        rows = cur.execute("SELECT * FROM LOCATIONS")
         return render_template("index.html", rows=rows)
 
 
 @app.route("/remove", methods=["POST"])
 def remove():
     id=request.form.get("id")
-    cur.execute("DELETE FROM birthdays WHERE id = :id", id=id)
+    cur.execute("DELETE FROM tabelog.db WHERE id = :id", id=id)
     return redirect("/")
