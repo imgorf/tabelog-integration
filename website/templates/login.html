@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block main %}
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}  <!-- CSRF token for security -->
 
-    <form action="/login" method="post">
         <div class="mb-3">
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
         </div>
@@ -16,7 +17,12 @@
         <button class="btn btn-primary" type="submit">Log In</button>
     </form>
 
-    {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>'
+    <!-- Error Message Handling -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
 {% endblock %}

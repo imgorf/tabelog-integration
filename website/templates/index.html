@@ -22,19 +22,19 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
-                    {% if session["user_id"] %}
-                        <ul class="navbar-nav me-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/quote">Quote</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
-                        </ul>
+                    {% if user.is_authenticated %}
                         <ul class="navbar-nav ms-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/changepassword">Change Password</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <li class="nav-item">
+                                    <button type="submit" class="nav-link" >Log Out</>
+                                </li>
+                            </form>
                         </ul>
                     {% else %}
                         <ul class="navbar-nav ms-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
                         </ul>
                     {% endif %}
                 </div>
