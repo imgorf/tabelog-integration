@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        {{ form.username }}  <!-- Automatically render username field -->
+        {% if form.username.errors %}
+            <div style="color: red;">
+                {% for error in form.username.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="mb-3">
+        {{ form.password }}  <!-- Automatically render password field -->
+        {% if form.password.errors %}
+            <div style="color: red;">
+                {% for error in form.password.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.password_confirm }}  <!-- Automatically render confirm password field -->
+        {% if form.password_confirm.errors %}
+            <div style="color: red;">
+                {% for error in form.password_confirm.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+
+    <!-- Error Message Handling -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
